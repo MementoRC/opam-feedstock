@@ -1,12 +1,12 @@
 context:
-  build_number: 101
+  build_number: 102
   name: opam
   version: "2.6.1"
 
   library: ${{ "Library/" if not unix else "" }}
   m2: ${{ "m2-" if not unix else "" }}
   sh: ${{ "sh" if unix else "bat" }}
-  # ocaml_win-64 ships gcc_* and vs2022_* tracks; follow the c_compiler lane
+  # ocaml_win-64 ships gcc_* and vs_* tracks; follow the c_compiler lane
   c_toolchain: ${{ "" if unix else c_compiler ~ "_*" }}
 
 recipe:
@@ -42,12 +42,18 @@ outputs:
             - if errorlevel 1 exit 1
     requirements:
       build:
-        - if: unix or arm64 or c_compiler == "vs2022"
+        - if: unix or c_compiler == "vs"
           then:
             - ${{ compiler("c") }}
             - ${{ compiler("cxx") }}
             - ${{ stdlib("c") }}
-          else:
+        - if: win and arm64
+          then:
+            # compiler("zig") reads zig_compiler_version from the pinning; c_compiler_version 2022 belongs to vs
+            - ${{ compiler("zig") }}
+            - ${{ stdlib("c") }}
+        - if: win and x86_64 and c_compiler == "gcc"
+          then:
             - ${{ compiler("m2w64_c") }}
             - ${{ compiler("m2w64_cxx") }}
             - ${{ stdlib("m2w64_c") }}
@@ -67,11 +73,11 @@ outputs:
         - curl
         - git
         - ${{ compiler("ocaml") }}
-        # compiler() has no build string; pin the gcc/vs2022/zig track on Windows
+        # compiler() has no build string; pin the gcc/vs/zig track on Windows
         - if: not unix
           then: ocaml_${{ target_platform }} ${{ ocaml_compiler_version }}.* ${{ c_toolchain }}
         # cross lanes build and run a native opam first (man pages, vendored parsers);
-        # the cross compiler does not pull in the native one
+        # the cross compiler no longer pulls in the native one
         - if: build_platform != target_platform
           then:
             - ocaml_${{ build_platform }} ${{ ocaml_compiler_version }}.*
