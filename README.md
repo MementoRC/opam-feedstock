@@ -26,38 +26,6 @@ Current build status
       </a>
     </td>
   </tr>
-    
-  <tr>
-    <td>Azure</td>
-    <td>
-      <details>
-        <summary>
-          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=15649&branchName=main">
-            <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/opam-feedstock?branchName=main">
-          </a>
-        </summary>
-        <table>
-          <thead><tr><th>Variant</th><th>Status</th></tr></thead>
-          <tbody><tr>
-              <td>osx_64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=15649&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/opam-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_arm64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=15649&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/opam-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_" alt="variant">
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </details>
-    </td>
-  </tr>
 </table>
 
 Current release info
@@ -70,10 +38,10 @@ Current release info
 Installing opam
 ===============
 
-Installing `opam` from the `conda-forge/label/ocaml_experimental` channel can be achieved by adding `conda-forge/label/ocaml_experimental` to your channels with:
+Installing `opam` from the `conda-forge/label/ocaml_vs` channel can be achieved by adding `conda-forge/label/ocaml_vs` to your channels with:
 
 ```
-conda config --add channels conda-forge/label/ocaml_experimental
+conda config --add channels conda-forge/label/ocaml_vs
 conda config --set channel_priority strict
 ```
 
@@ -119,7 +87,7 @@ It is possible to list all of the versions of `opam` available on your platform:
 <summary>With conda</summary>
 
 ```
-conda search opam --channel conda-forge/label/ocaml_experimental
+conda search opam --channel conda-forge/label/ocaml_vs
 ```
 
 </details>
@@ -128,7 +96,7 @@ conda search opam --channel conda-forge/label/ocaml_experimental
 <summary>With mamba</summary>
 
 ```
-mamba search opam --channel conda-forge/label/ocaml_experimental
+mamba search opam --channel conda-forge/label/ocaml_vs
 ```
 
 </details>
@@ -137,7 +105,7 @@ mamba search opam --channel conda-forge/label/ocaml_experimental
 <summary>With pixi</summary>
 
 ```
-pixi search opam --channel conda-forge/label/ocaml_experimental
+pixi search opam --channel conda-forge/label/ocaml_vs
 ```
 
 </details>
@@ -147,13 +115,13 @@ pixi search opam --channel conda-forge/label/ocaml_experimental
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search opam --channel conda-forge/label/ocaml_experimental
+mamba repoquery search opam --channel conda-forge/label/ocaml_vs
 
 # List packages depending on `opam`:
-mamba repoquery whoneeds opam --channel conda-forge/label/ocaml_experimental
+mamba repoquery whoneeds opam --channel conda-forge/label/ocaml_vs
 
 # List dependencies of `opam`:
-mamba repoquery depends opam --channel conda-forge/label/ocaml_experimental
+mamba repoquery depends opam --channel conda-forge/label/ocaml_vs
 ```
 
 </details>
